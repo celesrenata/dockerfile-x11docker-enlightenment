@@ -21,10 +21,39 @@
 #
 # Look at x11docker --help for further options.
 
-FROM voidlinux/voidlinux
+# Use the Arch Linux base image
+FROM archlinux:latest
 
-RUN xbps-install -Su -y
-RUN xbps-install -S -y enlightenment dbus liberation-fonts-ttf \
-    leafpad lxterminal bash \
-    mesa-ati-dri mesa-intel-dri mesa-nouveau-dri
+# Update the package database and install required dependencies
+RUN pacman -Sy --noconfirm archlinux-keyring
+RUN pacman-key --refresh-keys
+RUN pacman -Syu --noconfirm && \
+    pacman -S --noconfirm base-devel git enlightenment ecrire ephoto evisum rage terminology
+
+# Update Go to ignore Amazon Proxy
+# TODO: update to USE amazon proxy
+ENV GOPROXY=direct
+
+# Create a new user and make it a sudoer
+RUN useradd -m -G wheel -s /bin/bash celes && \
+    echo 'celes ALL=(ALL) NOPASSWD: ALL' >> /etc/sudoers
+
+# Switch to the new user
+USER celes
+
+# Install yay to make it easier to manage AUR packages
+RUN git clone https://aur.archlinux.org/yay.git /home/celes/yay && \
+    cd /home/celes/yay && \
+    makepkg -si --noconfirm
+
+# Install Userland dependencies
+#RUN yay -S --noconfirm econnman edi enjoy-git eperiodique epour epymic-git eruler-git efbb-git elemines-git
+
+# Cleanup
+RUN rm -rf /home/celes/yay
+
+# Switch back to root
+USER root
+
+# Specify the entry point
 CMD enlightenment_start
