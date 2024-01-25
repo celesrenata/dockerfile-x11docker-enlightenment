@@ -22,13 +22,13 @@
 # Look at x11docker --help for further options.
 
 #Use the Arch Linux base image
-FROM archlinux:latest
+FROM archlinux:base-devel
 
 # Update the package database and install required dependencies
 RUN pacman -Sy --noconfirm archlinux-keyring
 RUN pacman-key --refresh-keys
 RUN pacman -Syu --noconfirm && \
-    pacman -S --noconfirm base-devel git enlightenment ecrire ephoto evisum rage terminology
+    pacman -S --noconfirm git enlightenment ecrire ephoto evisum rage terminology
 
 # Update Go to ignore Amazon Proxy
 # TODO: update to USE amazon proxy
