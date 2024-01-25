@@ -35,8 +35,8 @@ RUN pacman -Syu --noconfirm && \
 ENV GOPROXY=direct
 
 # Create a new user and make it a sudoer
-RUN useradd -m -G wheel -s /bin/bash celes && \
-    echo 'celes ALL=(ALL) NOPASSWD: ALL' >> /etc/sudoers
+RUN useradd -m -G wheel -s /bin/bash builder && \
+    echo 'builder ALL=(ALL) NOPASSWD: ALL' >> /etc/sudoers
 
 # Switch to the new user
 USER builder
