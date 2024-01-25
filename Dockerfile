@@ -28,7 +28,7 @@ FROM archlinux:latest
 RUN pacman -Sy --noconfirm archlinux-keyring
 RUN pacman-key --refresh-keys
 RUN pacman -Syu --noconfirm && \
-    pacman -S --noconfirm base-devel git enlightenment ecrire ephoto evisum rage terminology
+    pacman -S --noconfirm base-devel git enlightenment ecrire ephoto evisum rage terminology socat
 
 # Update Go to ignore Amazon Proxy
 # TODO: update to USE amazon proxy
