@@ -56,4 +56,4 @@ RUN rm -rf /home/celes/yay
 USER root
 
 # Specify the entry point
-CMD /usr/bin/enlightenment_start
+CMD enlightenment_start
