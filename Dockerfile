@@ -21,14 +21,14 @@
 #
 # Look at x11docker --help for further options.
 
-# Use the Arch Linux base image
+#Use the Arch Linux base image
 FROM archlinux:latest
 
 # Update the package database and install required dependencies
 RUN pacman -Sy --noconfirm archlinux-keyring
 RUN pacman-key --refresh-keys
 RUN pacman -Syu --noconfirm && \
-    pacman -S --noconfirm base-devel git enlightenment ecrire ephoto evisum rage terminology socat
+    pacman -S --noconfirm base-devel git enlightenment ecrire ephoto evisum rage terminology
 
 # Update Go to ignore Amazon Proxy
 # TODO: update to USE amazon proxy
@@ -39,20 +39,20 @@ RUN useradd -m -G wheel -s /bin/bash celes && \
     echo 'celes ALL=(ALL) NOPASSWD: ALL' >> /etc/sudoers
 
 # Switch to the new user
-USER celes
+USER builder
 
 # Install yay to make it easier to manage AUR packages
 RUN git clone https://aur.archlinux.org/yay.git /home/celes/yay && \
-    cd /home/celes/yay && \
+    cd /home/builder/yay && \
     makepkg -si --noconfirm
 
 # Install Userland dependencies
-#RUN yay -S --noconfirm econnman edi enjoy-git eperiodique epour epymic-git eruler-git efbb-git elemines-git
+RUN yay -S --noconfirm econnman # edi enjoy-git eperiodique epour epymic-git eruler-git efbb-git elemines-git
 
 # Cleanup
-RUN rm -rf /home/celes/yay
+RUN rm -rf /home/builder/yay
 
-# Switch back to root
+# Switch back to root user
 USER root
 
 # Specify the entry point
