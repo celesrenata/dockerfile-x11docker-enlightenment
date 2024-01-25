@@ -42,7 +42,7 @@ RUN useradd -m -G wheel -s /bin/bash builder && \
 USER builder
 
 # Install yay to make it easier to manage AUR packages
-RUN git clone https://aur.archlinux.org/yay.git /home/celes/yay && \
+RUN git clone https://aur.archlinux.org/yay.git /home/builder/yay && \
     cd /home/builder/yay && \
     makepkg -si --noconfirm
 
