@@ -26,7 +26,9 @@ FROM archlinux:base-devel
 
 # Update the package database and install required dependencies
 RUN pacman -Sy --noconfirm archlinux-keyring
-RUN pacman-key --refresh-keys
+RUN pacman-key --init
+RUN pacman-key --populate archlinux
+#RUN pacman-key --refresh-keys
 RUN pacman -Syu --noconfirm && \
     pacman -S --noconfirm git enlightenment ecrire ephoto evisum rage sudo terminology
 
