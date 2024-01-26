@@ -30,7 +30,7 @@ RUN pacman-key --init
 RUN pacman-key --populate archlinux
 #RUN pacman-key --refresh-keys
 RUN pacman -Syu --noconfirm && \
-    pacman -S --noconfirm git enlightenment ecrire ephoto evisum python-setuptools rage sudo terminology
+    pacman -S --noconfirm git dbus enlightenment ecrire ephoto evisum python-setuptools rage sudo terminology
 
 # Update Go to ignore Amazon Proxy
 # TODO: update to USE amazon proxy
