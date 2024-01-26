@@ -49,7 +49,7 @@ RUN git clone https://aur.archlinux.org/yay.git /home/builder/yay && \
     makepkg -si --noconfirm
 
 # Install Userland dependencies
-RUN yay -S --noconfirm econnman # edi enjoy-git eperiodique epour epymic-git eruler-git efbb-git elemines-git
+RUN yay -S --noconfirm econnman polkit-efl-git # edi enjoy-git eperiodique epour epymic-git eruler-git efbb-git elemines-git
 
 # Cleanup
 RUN rm -rf /home/builder/yay
